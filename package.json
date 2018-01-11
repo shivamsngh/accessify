@@ -1,0 +1,19 @@
+{
+  "name": "accessify",
+  "version": "0.0.1",
+  "description": "Image Description for Blinds",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shivamsngh/accessify.git"
+  },
+  "author": "Shivam Singh, Anurag Bhandari",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shivamsngh/accessify/issues"
+  },
+  "homepage": "https://github.com/shivamsngh/accessify#readme"
+}

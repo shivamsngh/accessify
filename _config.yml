@@ -1,6 +1,7 @@
 theme: jekyll-theme-cayman
 title: Accessify
 description: Towards a Truly Accessible Web
+show_downloads: true
 plugins:
  - jekyll-feed
  - jekyll-redirect-from

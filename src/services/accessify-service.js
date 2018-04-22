@@ -5,7 +5,7 @@ export default class ApiService {
 
     constructor() { }
 
-    getImageDescription(object) {
+    getImageDescriptionFileFromServer(object) {
         return new Promise((resolve, reject) => {
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function () {
@@ -20,9 +20,13 @@ export default class ApiService {
                 reject({ status: this.status, statusText: xhttp.statusText });
             };
 
-            xhttp.open("GET", `${API_URL_TEST}/getImageDescription?domain=${object.domain}&region=${object.region}`);
+            xhttp.open("GET", `${API_URL_TEST}/getImageDescription?domain=${object.location}&region=${object.region}`);
             xhttp.send();
         });
+
+        // return fetch(`${API_URL}`,)
     }
+
+   
 }
 

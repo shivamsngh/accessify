@@ -20,7 +20,7 @@ export default class ApiService {
                 reject({ status: this.status, statusText: xhttp.statusText });
             };
 
-            xhttp.open("GET", `${API_URL_TEST}/getImageDescription?domain=${object.location}&region=${object.region}`);
+            xhttp.open("GET", `${API_URL}/getImageDescription?domain=${object.location}&region=${object.region}`);
             xhttp.send();
         });
 

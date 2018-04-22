@@ -11,13 +11,13 @@ class InjectComponent {
 		const domain = window.location.href;
 		// Check in local storage for the file
 		let versionFile = window.localStorage.getItem(domain);
-		versionFile = JSON.parse(versionFile);
-		const parsedVersionFile = JSON.parse(versionFile[0]);
-		console.log("version file from storage", parsedVersionFile);
+		versionFile = JSON.parse(versionFile);	
+		console.log("version file from storage", versionFile);
 		if (versionFile) {
+			// const parsedVersionFile = JSON.parse(versionFile[0]);
 			const images = document.getElementsByTagName('img');
 			for (let index = 0; index < images.length; index++) {
-				images[index].alt = parsedVersionFile.image_data[index].ImageDesc;
+				images[index].alt = versionFile.image_data[index].ImageDesc;
 			}
 		}
 		else {

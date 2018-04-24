@@ -11,13 +11,16 @@ class InjectComponent {
 		const domain = window.location.href;
 		// Check in local storage for the file
 		let versionFile = window.localStorage.getItem(domain);
-		versionFile = JSON.parse(versionFile);	
 		console.log("version file from storage", versionFile);
 		if (versionFile) {
-			// const parsedVersionFile = JSON.parse(versionFile[0]);
+			// Version file in redis string format
+
+			const parsedStringFile = JSON.parse(versionFile);
+			const parsedVersionFile= JSON.parse(parsedStringFile[0]);
 			const images = document.getElementsByTagName('img');
 			for (let index = 0; index < images.length; index++) {
-				images[index].alt = versionFile.image_data[index].ImageDesc;
+				// CHECK if ALT text already present
+				images[index].alt = parsedVersionFile.image_data[index].ImageDesc;
 			}
 		}
 		else {
@@ -38,17 +41,42 @@ class InjectComponent {
 	generateVersioningFileOnServer(domain) {
 		const images = document.getElementsByTagName('img');
 		console.log("IMages", images);
+		// const imgLengthInBrowser = images.length;
+		let imageArrayBrowser = [];
+		for (let i = 0; i < images.length; i++) {
+			let obj = { imgUri: images[i].currentSrc, sitename: domain };
+			imageArrayBrowser.push(obj);
+		}
 		return new Promise((resolve, reject) => {
-			return this.api.getImageDescriptionFileFromServer({ location: domain, region: 'us' })
+			return this.api.getImageDescriptionFileFromServer({ location: domain, region: 'us', imageArrayFromBrowser: imageArrayBrowser })
 				.then((successFile) => {
-					console.log("Success", successFile);
-					this.saveInLocalStorage(domain, successFile);
-					resolve(successFile);
+					// if (this.integrityCheck(images, successFile)) {
+						console.log("Success", successFile);
+						this.saveInLocalStorage(domain, successFile);
+						resolve(successFile);
+					// }
+					// else {
+					// 	reject('File not compatible');
+					// }
+
 				}, (error) => {
 					console.log("Error in generating version file", error);
 					reject(error);
 				})
 		})
+
+	}
+
+	integrityCheck(images, versioningFile) {
+		console.log("ver file", versioningFile);
+		const fileFromServer = JSON.parse(versioningFile);
+		console.log("parsed ver file", fileFromServer);
+		if (images.length === fileFromServer.image_data.length)
+			return true;
+		else return false;
+	}
+
+	checkForAltTextValidity(images){
 
 	}
 

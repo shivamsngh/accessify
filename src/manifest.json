@@ -1,0 +1,24 @@
+{
+  "name": "Accessify",
+  "version": "0.0.2",
+  "manifest_version": 3,
+  "description": "Accessify your website for a better content experience.",
+  "homepage_url": "http://shivamsngh.github.io",
+  "background": {
+    "scripts": [
+      "index.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "icon.png"
+  },
+  "browser_action": {
+    "default_title": "Accessify-Get Image Descriptions!"
+  },
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "tabs"
+  ]
+}

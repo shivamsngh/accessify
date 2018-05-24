@@ -6,7 +6,7 @@ export default class ApiService {
     constructor() { }
 
     getImageDescriptionFileFromServer(object) {
-        return fetch(`${API_URL_TEST}/getImageDescription`, {
+        return fetch(`${API_URL}/getImageDescription`, {
             method: 'post',
             headers: {
                 "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"

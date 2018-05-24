@@ -2,7 +2,7 @@
 
 Accessify is built with latest ES6 features. It is compiled with Babel to be backwards compatible.
 
-Make sure latest stable [Node.js](https://node.org) version is instaled on yout system.
+Make sure latest stable [Node.js](https://node.org) version is installed on yout system.
 
 Clone the repo and start using
 

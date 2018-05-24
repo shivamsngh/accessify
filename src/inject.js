@@ -16,7 +16,7 @@ class InjectComponent {
 			// Version file in redis string format
 
 			const parsedStringFile = JSON.parse(versionFile);
-			const parsedVersionFile= JSON.parse(parsedStringFile[0]);
+			const parsedVersionFile = JSON.parse(parsedStringFile[0]);
 			const images = document.getElementsByTagName('img');
 			for (let index = 0; index < images.length; index++) {
 				// CHECK if ALT text already present
@@ -41,19 +41,20 @@ class InjectComponent {
 	generateVersioningFileOnServer(domain) {
 		const images = document.getElementsByTagName('img');
 		console.log("IMages", images);
+		// console.log("Image src", images[0].attributes.getNamedItem('src').nodeValue);
 		// const imgLengthInBrowser = images.length;
 		let imageArrayBrowser = [];
 		for (let i = 0; i < images.length; i++) {
-			let obj = { imgUri: images[i].currentSrc, sitename: domain };
+			let obj = { imgUri: images[i].attributes.getNamedItem('src').nodeValue, sitename: domain };
 			imageArrayBrowser.push(obj);
 		}
 		return new Promise((resolve, reject) => {
 			return this.api.getImageDescriptionFileFromServer({ location: domain, region: 'us', imageArrayFromBrowser: imageArrayBrowser })
 				.then((successFile) => {
 					// if (this.integrityCheck(images, successFile)) {
-						console.log("Success", successFile);
-						this.saveInLocalStorage(domain, successFile);
-						resolve(successFile);
+					console.log("Success in getImageDescriptionFileFromServer", successFile);
+					this.saveInLocalStorage(domain, successFile);
+					resolve(successFile);
 					// }
 					// else {
 					// 	reject('File not compatible');
@@ -76,7 +77,7 @@ class InjectComponent {
 		else return false;
 	}
 
-	checkForAltTextValidity(images){
+	checkForAltTextValidity(images) {
 
 	}
 

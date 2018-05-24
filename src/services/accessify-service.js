@@ -6,25 +6,21 @@ export default class ApiService {
     constructor() { }
 
     getImageDescriptionFileFromServer(object) {
-        return new Promise((resolve, reject) => {
-            const xhttp = new XMLHttpRequest();
-            xhttp.onload = function () {
-                if (this.status >= 200 && this.status < 300) {
-                    console.log("response", xhttp.responseText);
-                    resolve(xhttp.response);
-                }
-            };
-
-            xhttp.onerror = function () {
-                console.log("Onerror", xhttp);
-                reject({ status: this.status, statusText: xhttp.statusText });
-            };
-
-            xhttp.open("GET", `${API_URL}/getImageDescription?domain=${object.location}&region=${object.region}&imageArrayFromBrowser=${JSON.stringify(object.imageArrayFromBrowser)}`);
-            xhttp.send();
-        });
-
-        // return fetch(`${API_URL}`,)
+        return fetch(`${API_URL_TEST}/getImageDescription`, {
+            method: 'post',
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+            },
+            body: `domain=${object.location}&region=${object.region}&imageArrayFromBrowser=${JSON.stringify(object.imageArrayFromBrowser)}`
+        })
+            .then(function (data) {
+                console.log('Request succeeded with JSON response', data);
+                return data;
+            })
+            .catch(function (error) {
+                console.log('Request failed', error);
+                return Promise.reject(error);
+            });
     }
 
 

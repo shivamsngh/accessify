@@ -10,13 +10,13 @@ class InjectComponent {
 	getImageDesc() {
 		const domain = window.location.href;
 		// Check in local storage for the file
-		let versionFile = window.localStorage.getItem(domain);
+		const versionFile = window.localStorage.getItem(domain);
 		console.log("version file from storage", versionFile);
 		if (versionFile) {
 			// Version file in redis string format
-
-			const parsedStringFile = JSON.parse(versionFile);
-			const parsedVersionFile = JSON.parse(parsedStringFile[0]);
+			const parsedVersionFile = JSON.parse(versionFile);
+			console.log("Parsed version file", parsedVersionFile);
+			// const parsedVersionFile = JSON.parse(parsedStringFile[0]);
 			const images = document.getElementsByTagName('img');
 			for (let index = 0; index < images.length; index++) {
 				// CHECK if ALT text already present
@@ -51,15 +51,9 @@ class InjectComponent {
 		return new Promise((resolve, reject) => {
 			return this.api.getImageDescriptionFileFromServer({ location: domain, region: 'us', imageArrayFromBrowser: imageArrayBrowser })
 				.then((successFile) => {
-					// if (this.integrityCheck(images, successFile)) {
 					console.log("Success in getImageDescriptionFileFromServer", successFile);
 					this.saveInLocalStorage(domain, successFile);
 					resolve(successFile);
-					// }
-					// else {
-					// 	reject('File not compatible');
-					// }
-
 				}, (error) => {
 					console.log("Error in generating version file", error);
 					reject(error);

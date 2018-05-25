@@ -15,8 +15,9 @@ export default class ApiService {
             body: `domain=${object.location}&region=${object.region}&imageArrayFromBrowser=${JSON.stringify(object.imageArrayFromBrowser)}`
         })
             .then(function (data) {
+                if (data.status !== 200) throw new Error(data.status);
                 console.log('Request succeeded with JSON response', data);
-                return data;
+                return data.json();
             })
             .catch(function (error) {
                 console.log('Request failed', error);

@@ -1,6 +1,6 @@
 const API_URL = `http://52.224.178.135/api`;
 const API_URL_TEST = `http://localhost:3000/api`;
-const API_URL_SECURE = `https://accessify.eastus.cloudapp.azure.com:3000/api`;
+const API_URL_SECURE = `https://accessify.eastus.cloudapp.azure.com/api`;
 
 export default class ApiService {
 
